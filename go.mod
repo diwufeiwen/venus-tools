@@ -11,8 +11,10 @@ require (
 	github.com/filecoin-project/venus v1.0.5-0.20210907075013-1925e5d6efdd
 	github.com/filecoin-project/venus-messager v1.1.1
 	github.com/ipfs-force-community/venus-common-utils v0.0.0-20210714054928-2042a9040759
-	github.com/ipfs/go-cid v0.0.7
+	github.com/ipfs/go-log/v2 v2.3.0
+	github.com/urfave/cli/v2 v2.3.0
 	github.com/whyrusleeping/cbor-gen v0.0.0-20210219115102-f37d292932f2
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1
 )
 
 replace github.com/ipfs/go-ipfs-cmds => github.com/ipfs-force-community/go-ipfs-cmds v0.6.1-0.20210521090123-4587df7fa0ab
