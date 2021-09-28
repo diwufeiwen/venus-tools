@@ -8,6 +8,7 @@ import (
 
 var Commands = []*cli.Command{
 	WithCategory("power", powerCmd),
+	WithCategory("fil", filCmd),
 }
 
 func WithCategory(cat string, cmd *cli.Command) *cli.Command {
