@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	types2 "github.com/filecoin-project/venus/venus-shared/types"
 
 	"github.com/urfave/cli/v2"
 
@@ -9,8 +10,6 @@ import (
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 
 	"venus-tools/types"
-
-	types2 "github.com/filecoin-project/venus/pkg/types"
 )
 
 var filCmd = &cli.Command{
@@ -62,7 +61,7 @@ var sendCmd = &cli.Command{
 		}
 
 		nonce := cctx.Uint64("nonce")
-		msg := &types2.UnsignedMessage{
+		msg := &types2.Message{
 			From:  fromAddr,
 			To:    toAddr,
 			Value: types.BigInt(value),

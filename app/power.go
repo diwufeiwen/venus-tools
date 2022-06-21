@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/filecoin-project/venus/venus-shared/actors"
+	types2 "github.com/filecoin-project/venus/venus-shared/types"
 	"strconv"
 	"strings"
 
@@ -15,9 +17,6 @@ import (
 
 	typegen "github.com/whyrusleeping/cbor-gen"
 	"venus-tools/types"
-
-	"github.com/filecoin-project/venus/pkg/specactors"
-	types2 "github.com/filecoin-project/venus/pkg/types"
 )
 
 var powerCmd = &cli.Command{
@@ -80,10 +79,11 @@ var terminateSectors = &cli.Command{
 }
 
 func serializeParamsAndSend(params typegen.CBORMarshaler) ([]byte, error) {
-	paramBytes, err := specactors.SerializeParams(params)
+	paramBytes, err := actors.SerializeParams(params)
 	if err != nil {
 		return nil, err
 	}
+
 	return paramBytes, nil
 }
 
@@ -115,7 +115,8 @@ func send(cctx *cli.Context, params []byte, methodNum abi.MethodNum) error {
 
 	nonce := cctx.Uint64("nonce")
 
-	uid, err := api.PushMessage(cctx.Context, &types2.UnsignedMessage{
+
+	uid, err := api.PushMessage(cctx.Context, &types2.Message{
 		Version: 0,
 		To:      toAddr,
 		From:    fromAddr,

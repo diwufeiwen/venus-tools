@@ -1,3 +1,4 @@
+
 package main
 
 import (
@@ -9,6 +10,7 @@ import (
 var Commands = []*cli.Command{
 	WithCategory("power", powerCmd),
 	WithCategory("fil", filCmd),
+	WithCategory("market", marketCmds),
 }
 
 func WithCategory(cat string, cmd *cli.Command) *cli.Command {
@@ -16,7 +18,7 @@ func WithCategory(cat string, cmd *cli.Command) *cli.Command {
 	return cmd
 }
 
-var msgConfig MessagerConfig
+var msgConfig VenusConfig
 
 func main() {
 	app := &cli.App{
@@ -28,22 +30,27 @@ func main() {
 			&cli.BoolFlag{
 				Name: "color",
 			},
+/*			&cli.StringFlag{
+				Name:  "node-api",
+				Usage: "node-api",
+			},*/
 			&cli.StringFlag{
 				Name:  "msg-api",
 				Usage: "msg-api",
 			},
 			&cli.StringFlag{
-				Name:  "msg-token",
-				Usage: "msg-token",
+				Name:  "token",
+				Usage: "token",
 			},
 		},
 
 		Commands: append(Commands),
 
 		Before: func(cctx *cli.Context) error {
-			msgConfig = MessagerConfig{
-				Url:   cctx.String("msg-api"),
-				Token: cctx.String("msg-token"),
+			msgConfig = VenusConfig{
+				NodeUrl:    cctx.String("node-api"),
+				MessageUrl: cctx.String("msg-api"),
+				Token:      cctx.String("token"),
 			}
 
 			return nil
